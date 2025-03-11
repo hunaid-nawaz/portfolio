@@ -32,8 +32,8 @@ const Navbar = () => {
         transition={{duration: 0.5}}
         className='container mx-auto hidden md:flex justify-between items-center py-6'>
         <div className='text-xl lg:text-2xl font-bold flex items-center gap-1'>
-          <span className='text-white'>IRON</span>
-          <span className='text-purple-500'>CODING</span>
+          <span className='text-white'>AppDev</span>
+          <span className='text-purple-500'>Ace</span>
         </div>
         <div>
           <ul className='hidden md:flex items-center space-x-6 list-none lg:text-lg md:text-base text-white'>
