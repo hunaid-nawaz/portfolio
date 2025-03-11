@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react"
+import { Link } from 'react-scroll';
 
 const Navbar = () => {
   const variants = {
@@ -18,10 +19,10 @@ const Navbar = () => {
   }
   const [menu, setMenu] = useState(false);
   const items = [
-    {id: 1, text: 'About'},
-    {id: 2, text: 'Services'},
-    {id: 3, text: 'Work'},
-    {id: 4, text: 'Contact'}
+    {id: 1, text: 'About', to: "about"},
+    {id: 2, text: 'Services', to: "services"},
+    {id: 3, text: 'Work', to: "work"},
+    {id: 4, text: 'Contact', to: "contact"}
   ]
   return (
     <div>
@@ -36,9 +37,11 @@ const Navbar = () => {
         </div>
         <div>
           <ul className='hidden md:flex items-center space-x-6 list-none lg:text-lg md:text-base text-white'>
-            {items.map((item) => (
-                <li key={item.id}>
-                  {item.text}
+            {items.map(({id, text, to}) => (
+                <li key={id}>
+                  <Link to={to} smooth={true} duration={500} offset={-70  }>
+                    {text}
+                  </Link>
                 </li>
               ))
             }
@@ -62,10 +65,12 @@ const Navbar = () => {
               menu && (
                 <div className='flex flex-col justify-center items-center'>
                   <ul className='space-y-6, text-black text-lg'>
-                    {items.map((item) => (
-                        <li key={item.id}
+                    {items.map(({id, text, to}) => (
+                        <li key={id}
                           className='hover:text-purple-500 duration-200 cursor-pointer'>
-                          {item.text}
+                          <Link to={to} smooth={true} duration={500} offset={-70  }>
+                            {text}
+                          </Link>
                         </li>
                       ))
                     }
