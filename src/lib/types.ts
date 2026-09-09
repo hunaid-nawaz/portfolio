@@ -7,6 +7,7 @@ export type Person = {
   stackLine: string;
   yearsExperience: number;
   email: string;
+  phone: string;
   linkedin: string;
   github: string;
   photo: string;
@@ -14,14 +15,12 @@ export type Person = {
   kicker: string;
   heroTitle: string;
   heroAccent: string;
-  hireSubject: string;
-  contractSubject: string;
   bio: string;
 };
 
 export type SiteCopy = {
   lanesEyebrow: string;
-  lanesTitle: string;
+  skillsEyebrow: string;
   workEyebrow: string;
   workTitle: string;
   workIntro: string;

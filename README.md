@@ -12,14 +12,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Light and dark follow the OS until you use the sun/moon control in the header. That choice is saved in the browser.
+Light is the default. The sun/moon control in the header still switches to dark; that choice is saved in the browser.
 
 ## Deploy on Vercel
 
 1. Import this repo (or this folder as a project).
 2. Set **Root Directory** to `portfolio`.
 3. Add `NEXT_PUBLIC_SITE_URL` (your production URL, no trailing slash) so sitemap and robots are correct.
-4. Put a real address in `content/person.md` (`email`) before sharing the site. `hunaid@example.com` is a placeholder.
+4. Email and phone live in `content/person.md`.
 
 ## Edit content
 

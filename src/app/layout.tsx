@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
+import { cookies } from "next/headers";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getPerson, siteUrl } from "@/lib/content";
 import { personDescription } from "@/lib/seo";
-import { themeInitScript } from "@/lib/theme";
+import { resolveTheme, THEME_COOKIE } from "@/lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,33 +25,39 @@ export function generateMetadata(): Metadata {
   return {
     metadataBase: new URL(siteUrl()),
     title: {
-      default: `${person.name} — ${person.headline}`,
-      template: `%s — ${person.name}`,
+      default: `${person.name}, ${person.headline}`,
+      template: `%s, ${person.name}`,
     },
     description,
     openGraph: {
-      title: `${person.name} — ${person.headline}`,
+      title: `${person.name}, ${person.headline}`,
       description,
       type: "website",
     },
   };
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
   const person = getPerson();
+  const jar = await cookies();
+  const theme = resolveTheme(jar.get(THEME_COOKIE)?.value);
+  const htmlClass = [
+    geistSans.variable,
+    geistMono.variable,
+    theme,
+    "h-full antialiased",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={htmlClass}
+      style={{ colorScheme: theme ?? "light dark" }}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: themeInitScript }}
-        />
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-accent focus:px-3 focus:py-2 focus:text-background"
@@ -59,7 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader person={person} />
-        <main id="content" className="flex-1">
+        <main id="content" className="flex-1 pb-28 sm:pb-24">
           {children}
         </main>
         <SiteFooter person={person} />

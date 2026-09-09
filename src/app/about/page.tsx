@@ -18,19 +18,25 @@ export default function AboutPage() {
 
   return (
     <Container className="py-16 sm:py-24">
-      <SectionHeading
-        eyebrow={copy.aboutEyebrow}
-        title={copy.aboutTitle}
-        body={copy.aboutLead}
-      />
-
-      <div className="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
-        <div className="max-w-3xl space-y-5 text-base leading-7 text-muted sm:text-lg">
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-          ))}
+      <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+        <div className="min-w-0 max-w-3xl">
+          <SectionHeading
+            eyebrow={copy.aboutEyebrow}
+            title={copy.aboutTitle}
+            body={copy.aboutLead}
+            bodyClassName="text-justify"
+          />
+          <div className="mt-10 space-y-5 text-justify text-base leading-7 text-muted sm:text-lg">
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
+          </div>
         </div>
-        <Portrait person={person} className="max-w-xs lg:max-w-none" />
+        <Portrait
+          person={person}
+          size="md"
+          className="justify-self-center max-lg:order-first"
+        />
       </div>
 
       <section className="mt-20 border-t border-line pt-16">
@@ -41,16 +47,16 @@ export default function AboutPage() {
           {roles.map((role) => (
             <li key={role.slug} className="grid gap-4 py-10 sm:grid-cols-[10rem_1fr]">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                {role.period || "—"}
+                {role.period || ""}
               </p>
               <div>
                 <h3 className="text-xl font-semibold">{role.title}</h3>
                 <p className="mt-1 text-sm text-accent">
                   {role.org}
-                  {role.orgDetail ? ` · ${role.orgDetail}` : ""}
+                  {role.orgDetail ? `, ${role.orgDetail}` : ""}
                 </p>
                 <div className="mt-4">
-                  <MarkdownBody source={role.body} />
+                  <MarkdownBody source={role.body} className="text-justify" />
                 </div>
               </div>
             </li>

@@ -5,13 +5,13 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <Link
       href={`/work/${study.slug}`}
-      className="group flex flex-col border border-line bg-panel p-6 transition hover:border-accent/60 sm:p-8"
+      className="group flex min-w-0 flex-col border border-line bg-panel p-6 transition-colors hover:border-hover sm:p-8"
     >
       <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
         {study.kicker}
-        {study.anonymized ? " · Unnamed client" : ""}
+        {study.anonymized ? ", unnamed client" : ""}
       </p>
-      <h3 className="heading mt-3 text-2xl group-hover:text-accent sm:text-3xl">
+      <h3 className="heading mt-3 break-words text-2xl transition-colors group-hover:text-hover sm:text-3xl">
         {study.title}
       </h3>
       <p className="mt-3 flex-1 text-sm leading-6 text-muted sm:text-base">

@@ -25,6 +25,7 @@ groups:
     title: Frontend
     tags:
       - React
+      - Next.js
       - JavaScript
       - TypeScript
       - HTML

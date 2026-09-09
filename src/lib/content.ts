@@ -69,6 +69,7 @@ export function getPerson(): Person {
     stackLine: stringField(data, "stackLine"),
     yearsExperience: numberField(data, "yearsExperience"),
     email: stringField(data, "email"),
+    phone: stringField(data, "phone"),
     linkedin: stringField(data, "linkedin"),
     github: stringField(data, "github"),
     photo: stringField(data, "photo"),
@@ -76,8 +77,6 @@ export function getPerson(): Person {
     kicker: stringField(data, "kicker"),
     heroTitle: stringField(data, "heroTitle"),
     heroAccent: stringField(data, "heroAccent"),
-    hireSubject: stringField(data, "hireSubject", "Role at your company"),
-    contractSubject: stringField(data, "contractSubject", "Project inquiry"),
     bio: parsed.content.trim(),
   };
 }
@@ -87,7 +86,7 @@ export function getCopy(): SiteCopy {
 
   return {
     lanesEyebrow: stringField(data, "lanesEyebrow"),
-    lanesTitle: stringField(data, "lanesTitle"),
+    skillsEyebrow: stringField(data, "skillsEyebrow"),
     workEyebrow: stringField(data, "workEyebrow"),
     workTitle: stringField(data, "workTitle"),
     workIntro: stringField(data, "workIntro"),
@@ -209,14 +208,6 @@ export function getPosts(): Post[] {
 
 export function getPost(slug: string): Post | undefined {
   return getPosts().find((item) => item.slug === slug);
-}
-
-export function hireMailto(person: Person) {
-  return `mailto:${person.email}?subject=${encodeURIComponent(person.hireSubject)}`;
-}
-
-export function contractMailto(person: Person) {
-  return `mailto:${person.email}?subject=${encodeURIComponent(person.contractSubject)}`;
 }
 
 export function siteUrl() {

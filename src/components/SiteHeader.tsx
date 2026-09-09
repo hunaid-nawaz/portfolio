@@ -5,11 +5,12 @@ import { useState } from "react";
 import type { Person } from "@/lib/types";
 import { Container } from "./Container";
 import { ThemeToggle } from "./ThemeToggle";
+import { mailtoHref, telHref } from "@/lib/links";
 
 const links = [
-  { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/writing", label: "Writing" },
+  { href: "/work", label: "Work" },
+  { href: "/case-studies", label: "Case studies" },
 ];
 
 export function SiteHeader({ person }: { person: Person }) {
@@ -24,29 +25,37 @@ export function SiteHeader({ person }: { person: Person }) {
         </Link>
 
         <div className="flex items-center gap-3">
-          <nav className="hidden items-center gap-8 text-sm text-muted md:flex">
+          <nav className="hidden items-center gap-5 text-sm text-accent lg:flex">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition hover:text-foreground"
+                className="transition-colors hover:text-hover"
               >
                 {link.label}
               </Link>
             ))}
             <a
-              href={`mailto:${person.email}`}
-              className="rounded-full border border-line px-4 py-1.5 text-foreground transition hover:border-accent hover:text-accent"
+              href={mailtoHref(person)}
+              className="rounded-full border border-accent px-4 py-1.5 text-accent transition-colors hover:border-hover hover:bg-hover hover:text-background"
             >
               Email me
             </a>
+            {person.phone ? (
+              <a
+                href={telHref(person)}
+                className="rounded-full border border-accent px-4 py-1.5 text-accent transition-colors hover:border-hover hover:bg-hover hover:text-background"
+              >
+                Call
+              </a>
+            ) : null}
           </nav>
 
           <ThemeToggle />
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent text-accent transition-colors hover:border-hover hover:bg-hover hover:text-background lg:hidden"
             aria-expanded={open}
             aria-label="Open menu"
             onClick={() => setOpen((value) => !value)}
@@ -61,21 +70,26 @@ export function SiteHeader({ person }: { person: Person }) {
       </Container>
 
       {open ? (
-        <div className="border-t border-line bg-background md:hidden">
+        <div className="border-t border-line bg-background lg:hidden">
           <Container className="flex flex-col gap-4 py-5 text-base">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-foreground"
+                className="text-accent transition-colors hover:text-hover"
               >
                 {link.label}
               </Link>
             ))}
-            <a href={`mailto:${person.email}`} className="text-accent">
+            <a href={mailtoHref(person)} className="text-accent transition-colors hover:text-hover">
               Email me
             </a>
+            {person.phone ? (
+              <a href={telHref(person)} className="text-accent transition-colors hover:text-hover">
+                {person.phone}
+              </a>
+            ) : null}
           </Container>
         </div>
       ) : null}

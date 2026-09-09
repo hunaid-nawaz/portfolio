@@ -5,31 +5,39 @@ export function Portrait({
   person,
   className = "",
   priority = false,
+  size = "lg",
 }: {
   person: Person;
   className?: string;
   priority?: boolean;
+  size?: "md" | "lg";
 }) {
   if (!person.photo) {
     return null;
   }
 
+  const px = size === "lg" ? "h-56 w-56 sm:h-72 sm:w-72" : "h-40 w-40 sm:h-48 sm:w-48";
+
   return (
-    <figure className={`overflow-hidden border border-line bg-panel ${className}`}>
-      <Image
-        src={person.photo}
-        alt={person.photoAlt || person.name}
-        width={900}
-        height={1200}
-        priority={priority}
-        className="aspect-[3/4] h-auto w-full object-cover object-[center_18%]"
-        sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-      />
-      <figcaption className="border-t border-line px-4 py-3">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+    <figure className={`flex flex-col items-center text-center ${className}`}>
+      <div
+        className={`relative overflow-hidden rounded-full border-2 border-accent bg-panel ring-4 ring-line ${px}`}
+      >
+        <Image
+          src={person.photo}
+          alt={person.photoAlt || person.name}
+          width={640}
+          height={640}
+          priority={priority}
+          className="h-full w-full object-cover object-[center_12%]"
+          sizes="288px"
+        />
+      </div>
+      <figcaption className="mt-4">
+        <p className="font-semibold">{person.name}</p>
+        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
           {person.headline}
         </p>
-        <p className="mt-1 font-semibold">{person.name}</p>
       </figcaption>
     </figure>
   );

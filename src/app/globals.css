@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
 :root,
-html.dark {
-  color-scheme: dark;
-  --background: #07070c;
-  --foreground: #f4f4f2;
-  --muted: #9a9aa8;
-  --line: rgba(255, 255, 255, 0.09);
-  --panel: #101018;
-  --accent: #c8ff3d;
-  --accent-2: #7a6cff;
-}
-
 html.light {
   color-scheme: light;
-  --background: #f4f3ee;
-  --foreground: #17171c;
-  --muted: #5c5c68;
-  --line: rgba(23, 23, 28, 0.12);
+  --background: #f7f4fb;
+  --foreground: #4a3a6b;
+  --muted: #8a78ad;
+  --line: rgba(107, 79, 154, 0.18);
   --panel: #ffffff;
-  --accent: #3f6f00;
-  --accent-2: #4f46c8;
+  --accent: #7b5ea8;
+  --hover: #4a2f7a;
+  --heading: #5c3d8f;
+}
+
+html.dark {
+  color-scheme: dark;
+  --background: #0d0a14;
+  --foreground: #ddd0f2;
+  --muted: #b8a9d1;
+  --line: rgba(196, 181, 253, 0.16);
+  --panel: #16121f;
+  --accent: #c4b5fd;
+  --hover: #efe5ff;
+  --heading: #efe5ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    color-scheme: dark;
+    --background: #0d0a14;
+    --foreground: #ddd0f2;
+    --muted: #b8a9d1;
+    --line: rgba(196, 181, 253, 0.16);
+    --panel: #16121f;
+    --accent: #c4b5fd;
+    --hover: #efe5ff;
+    --heading: #efe5ff;
+  }
 }
 
 @theme inline {
@@ -30,22 +46,21 @@ html.light {
   --color-line: var(--line);
   --color-panel: var(--panel);
   --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
+  --color-hover: var(--hover);
+  --color-heading: var(--heading);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
 }
 
 ::selection {
@@ -55,16 +70,25 @@ body {
 
 .mesh {
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(122, 108, 255, 0.28), transparent 55%),
-    radial-gradient(900px 500px at 100% 0%, rgba(200, 255, 61, 0.12), transparent 50%),
-    radial-gradient(800px 400px at 50% 120%, rgba(122, 108, 255, 0.12), transparent 55%);
+    radial-gradient(1200px 600px at 10% -10%, rgba(123, 94, 168, 0.16), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(92, 61, 143, 0.1), transparent 50%),
+    radial-gradient(800px 400px at 50% 120%, rgba(123, 94, 168, 0.08), transparent 55%);
 }
 
-html.light .mesh {
+html.dark .mesh {
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(79, 70, 200, 0.12), transparent 55%),
-    radial-gradient(900px 500px at 100% 0%, rgba(63, 111, 0, 0.1), transparent 50%),
-    radial-gradient(800px 400px at 50% 120%, rgba(79, 70, 200, 0.08), transparent 55%);
+    radial-gradient(1200px 600px at 10% -10%, rgba(196, 181, 253, 0.2), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(74, 47, 122, 0.35), transparent 50%),
+    radial-gradient(800px 400px at 50% 120%, rgba(196, 181, 253, 0.1), transparent 55%);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) .mesh {
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(196, 181, 253, 0.2), transparent 55%),
+      radial-gradient(900px 500px at 100% 0%, rgba(74, 47, 122, 0.35), transparent 50%),
+      radial-gradient(800px 400px at 50% 120%, rgba(196, 181, 253, 0.1), transparent 55%);
+  }
 }
 
 .heading {
@@ -72,4 +96,5 @@ html.light .mesh {
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.3;
+  color: var(--heading);
 }

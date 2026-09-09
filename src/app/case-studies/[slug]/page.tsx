@@ -4,7 +4,7 @@ import { Container } from "@/components/Container";
 import { MarkdownBody } from "@/components/MarkdownBody";
 import { getPost, getPosts } from "@/lib/content";
 
-type WritingParams = { slug: string };
+type CaseStudyPostParams = { slug: string };
 
 export function generateStaticParams() {
   return getPosts().map((post) => ({ slug: post.slug }));
@@ -15,20 +15,20 @@ export const dynamicParams = false;
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<WritingParams>;
+  params: Promise<CaseStudyPostParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) {
-    return { title: "Writing" };
+    return { title: "Case studies" };
   }
   return { title: post.title };
 }
 
-export default async function PostPage({
+export default async function CaseStudyPostPage({
   params,
 }: {
-  params: Promise<WritingParams>;
+  params: Promise<CaseStudyPostParams>;
 }) {
   const { slug } = await params;
   const post = getPost(slug);

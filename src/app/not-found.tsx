@@ -9,7 +9,7 @@ export default function NotFound() {
       </p>
       <h1 className="heading mt-4 text-4xl">Page not found</h1>
       <p className="mt-4 text-muted">That route doesn’t exist on this site.</p>
-      <Link href="/" className="mt-8 inline-block text-accent hover:underline">
+      <Link href="/" className="mt-8 inline-block text-accent transition-colors hover:text-hover hover:underline">
         Back home
       </Link>
     </Container>

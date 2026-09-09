@@ -1,40 +1,52 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { THEME_STORAGE_KEY } from "@/lib/theme";
-
-type Theme = "light" | "dark";
+import { useSyncExternalStore } from "react";
+import { THEME_COOKIE, type Theme } from "@/lib/theme";
 
 function currentTheme(): Theme {
-  return document.documentElement.classList.contains("light") ? "light" : "dark";
+  const root = document.documentElement;
+  if (root.classList.contains("dark")) {
+    return "dark";
+  }
+  if (root.classList.contains("light")) {
+    return "light";
+  }
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function subscribeTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  media.addEventListener("change", onChange);
+  return () => {
+    observer.disconnect();
+    media.removeEventListener("change", onChange);
+  };
 }
 
 function applyTheme(theme: Theme) {
   document.documentElement.classList.remove("light", "dark");
   document.documentElement.classList.add(theme);
   document.documentElement.style.colorScheme = theme;
-  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  document.cookie = `${THEME_COOKIE}=${theme};path=/;max-age=31536000;samesite=lax`;
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme | null>(null);
-
-  useEffect(() => {
-    setTheme(currentTheme());
-  }, []);
-
+  const theme = useSyncExternalStore(subscribeTheme, currentTheme, () => "light");
   const next = theme === "dark" ? "light" : "dark";
 
   return (
     <button
       type="button"
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-foreground transition hover:border-accent hover:text-accent"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent text-accent transition-colors hover:border-hover hover:bg-hover hover:text-background"
       aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
-      disabled={theme === null}
-      onClick={() => {
-        applyTheme(next);
-        setTheme(next);
-      }}
+      onClick={() => applyTheme(next)}
     >
       {theme === "light" ? <MoonIcon /> : <SunIcon />}
     </button>

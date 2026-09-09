@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl();
   const now = new Date();
 
-  const staticRoutes = ["", "/work", "/about", "/writing"].map((path) => ({
+  const staticRoutes = ["", "/work", "/about", "/case-studies"].map((path) => ({
     url: `${base}${path || "/"}`,
     lastModified: now,
   }));
@@ -15,10 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
   }));
 
-  const writing = getPosts().map((post) => ({
-    url: `${base}/writing/${post.slug}`,
+  const posts = getPosts().map((post) => ({
+    url: `${base}/case-studies/${post.slug}`,
     lastModified: now,
   }));
 
-  return [...staticRoutes, ...work, ...writing];
+  return [...staticRoutes, ...work, ...posts];
 }

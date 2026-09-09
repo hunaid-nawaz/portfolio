@@ -3,7 +3,7 @@ items:
   - id: backend
     index: "01"
     title: Backend systems
-    summary: Production Rails — domain logic, relational data, REST APIs, background jobs, and the tests that make a change safe to ship.
+    summary: "Production Rails: domain logic, relational data, REST APIs, background jobs, and the tests that make a change safe to ship."
     tags:
       - Ruby
       - Rails
@@ -12,10 +12,11 @@ items:
       - REST APIs
   - id: frontend
     index: "02"
-    title: Product frontend
-    summary: Operator and customer UIs in React. The interface is part of the product, not a skin on an API I refuse to look at.
+    title: Frontend
+    summary: Operator and customer UIs in React and Next.js. The interface is part of the product, not a skin on an API I refuse to look at.
     tags:
       - React
+      - Next.js
       - JavaScript
       - TypeScript
       - HTML
@@ -32,7 +33,7 @@ items:
   - id: integrations
     index: "04"
     title: Payments & integrations
-    summary: Stripe, marketplace APIs, channel managers — the unglamorous contracts that fail loudly when they’re wrong. I design for sync, retries, and the job queue.
+    summary: Stripe, marketplace APIs, channel managers. The unglamorous contracts that fail loudly when they’re wrong. I design for sync, retries, and the job queue.
     tags:
       - Stripe
       - Amazon APIs

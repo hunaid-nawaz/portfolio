@@ -19,7 +19,7 @@ export default function WorkPage() {
         title={copy.workTitle}
         body={copy.workIntro}
       />
-      <div className="mt-12 grid gap-4 lg:grid-cols-2">
+      <div className="mt-12 grid min-w-0 gap-4 sm:grid-cols-2">
         {studies.map((study) => (
           <CaseStudyCard key={study.slug} study={study} />
         ))}

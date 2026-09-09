@@ -5,10 +5,10 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { getCopy, getPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Writing",
+  title: "Case studies",
 };
 
-export default function WritingPage() {
+export default function CaseStudiesPage() {
   const copy = getCopy();
   const posts = getPosts();
 
@@ -27,13 +27,13 @@ export default function WritingPage() {
         <ul className="mt-12 divide-y divide-line border-y border-line">
           {posts.map((post) => (
             <li key={post.slug} className="py-8">
-              <Link href={`/writing/${post.slug}`} className="group block">
+              <Link href={`/case-studies/${post.slug}`} className="group block">
                 {post.kicker ? (
                   <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
                     {post.kicker}
                   </p>
                 ) : null}
-                <h2 className="heading mt-2 text-2xl group-hover:text-accent">
+                <h2 className="heading mt-2 text-2xl transition-colors group-hover:text-hover">
                   {post.title}
                 </h2>
                 {post.date ? (

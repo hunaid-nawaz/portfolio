@@ -2,14 +2,14 @@
 slug: nice2stay
 title: Nice2stay
 kicker: Hospitality
-outcome: Reservations, CRM, and channel-manager sync that keep availability and price honest.
+outcome: Reservations, CRM, and channel manager sync that keep availability and price honest.
 stack:
   - Ruby on Rails
-  - Channel Manager APIs
+  - Channel manager APIs
   - Social login
 featured: true
 anonymized: false
-sort: 20
+sort: 40
 ---
 
 Nice2stay is a reservation platform with CRM attached. The calendar is the obvious surface. The actual problem is agreement: rooms, rates, and guest identity have to match what the channel manager says and what the front desk believes.

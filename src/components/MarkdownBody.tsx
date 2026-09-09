@@ -1,13 +1,21 @@
 import Markdown from "react-markdown";
 
-export function MarkdownBody({ source }: { source: string }) {
+export function MarkdownBody({
+  source,
+  className = "",
+}: {
+  source: string;
+  className?: string;
+}) {
   return (
-    <div className="max-w-3xl space-y-5 text-base leading-7 text-muted sm:text-lg">
+    <div
+      className={`max-w-3xl space-y-5 text-base leading-7 text-muted sm:text-lg ${className}`}
+    >
       <Markdown
         components={{
           p: ({ children }) => <p>{children}</p>,
           a: ({ href, children }) => (
-            <a href={href} className="text-accent underline-offset-4 hover:underline">
+            <a href={href} className="text-accent underline-offset-4 transition-colors hover:text-hover hover:underline">
               {children}
             </a>
           ),
