@@ -25,7 +25,7 @@ Tools grouped by how they are used.
 _Avoid_: skill bars, percentages
 
 **Post**:
-A writing piece under `/writing`.
+A writing piece under `/case-studies`.
 _Avoid_: blog, article (in code and filenames)
 
 **Recruiter**:

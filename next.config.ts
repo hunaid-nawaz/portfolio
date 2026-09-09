@@ -1,20 +1,17 @@
 import type { NextConfig } from "next";
 
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      {
-        source: "/writing",
-        destination: "/case-studies",
-        permanent: true,
-      },
-      {
-        source: "/writing/:slug",
-        destination: "/case-studies/:slug",
-        permanent: true,
-      },
-    ];
+  output: "export",
+  images: {
+    unoptimized: true,
   },
+  ...(isGitHubPages && {
+    basePath: "/portfolio",
+    assetPrefix: "/portfolio/",
+    trailingSlash: true,
+  }),
 };
 
 export default nextConfig;

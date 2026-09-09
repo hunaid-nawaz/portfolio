@@ -10,7 +10,7 @@ import { mailtoHref, telHref } from "@/lib/links";
 const links = [
   { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
-  { href: "/case-studies", label: "Case studies" },
+  { href: "/case-studies", label: "Case Studies" },
 ];
 
 export function SiteHeader({ person }: { person: Person }) {

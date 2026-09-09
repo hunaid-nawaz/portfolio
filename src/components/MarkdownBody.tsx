@@ -1,4 +1,5 @@
 import Markdown from "react-markdown";
+import { withBasePath } from "@/lib/base-path";
 
 export function MarkdownBody({
   source,
@@ -15,10 +16,17 @@ export function MarkdownBody({
         components={{
           p: ({ children }) => <p>{children}</p>,
           a: ({ href, children }) => (
-            <a href={href} className="text-accent underline-offset-4 transition-colors hover:text-hover hover:underline">
+            <a
+              href={href ? withBasePath(href) : href}
+              className="text-accent underline-offset-4 transition-colors hover:text-hover hover:underline"
+            >
               {children}
             </a>
           ),
+          img: ({ src, alt }) =>
+            typeof src === "string" ? (
+              <img src={withBasePath(src)} alt={alt ?? ""} />
+            ) : null,
           ul: ({ children }) => (
             <ul className="list-disc space-y-2 pl-5">{children}</ul>
           ),

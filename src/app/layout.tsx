@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from "next/headers";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { ThemeInit } from "@/components/ThemeInit";
 import { getPerson, siteUrl } from "@/lib/content";
 import { personDescription } from "@/lib/seo";
-import { resolveTheme, THEME_COOKIE } from "@/lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,27 +36,18 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   const person = getPerson();
-  const jar = await cookies();
-  const theme = resolveTheme(jar.get(THEME_COOKIE)?.value);
-  const htmlClass = [
-    geistSans.variable,
-    geistMono.variable,
-    theme,
-    "h-full antialiased",
-  ]
-    .filter(Boolean)
-    .join(" ");
 
   return (
     <html
       lang="en"
-      className={htmlClass}
-      style={{ colorScheme: theme ?? "light dark" }}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      style={{ colorScheme: "light dark" }}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
+        <ThemeInit />
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-accent focus:px-3 focus:py-2 focus:text-background"

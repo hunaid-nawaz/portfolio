@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { getCopy, getPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Case studies",
+  title: "Case Studies",
 };
 
 export default function CaseStudiesPage() {

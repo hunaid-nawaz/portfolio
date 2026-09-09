@@ -7,7 +7,9 @@ import { getPost, getPosts } from "@/lib/content";
 type CaseStudyPostParams = { slug: string };
 
 export function generateStaticParams() {
-  return getPosts().map((post) => ({ slug: post.slug }));
+  const posts = getPosts().map((post) => ({ slug: post.slug }));
+  // Static export requires at least one path for a dynamic route.
+  return posts.length > 0 ? posts : [{ slug: "_" }];
 }
 
 export const dynamicParams = false;
@@ -20,7 +22,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) {
-    return { title: "Case studies" };
+    return { title: "Case Studies" };
   }
   return { title: post.title };
 }

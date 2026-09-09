@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { withBasePath } from "./base-path";
 import type {
   CaseStudy,
   Lane,
@@ -72,7 +73,7 @@ export function getPerson(): Person {
     phone: stringField(data, "phone"),
     linkedin: stringField(data, "linkedin"),
     github: stringField(data, "github"),
-    photo: stringField(data, "photo"),
+    photo: withBasePath(stringField(data, "photo")),
     photoAlt: stringField(data, "photoAlt"),
     kicker: stringField(data, "kicker"),
     heroTitle: stringField(data, "heroTitle"),
@@ -211,5 +212,12 @@ export function getPost(slug: string): Post | undefined {
 }
 
 export function siteUrl() {
-  return process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  if (fromEnv) {
+    return fromEnv;
+  }
+  if (process.env.GITHUB_PAGES === "true") {
+    return "https://hunaid-nawaz.github.io/portfolio";
+  }
+  return "http://localhost:3000";
 }

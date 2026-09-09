@@ -31,7 +31,7 @@ Light is the default. The sun/moon control in the header still switches to dark;
 | `content/toolbox.md` | Tool groups on About |
 | `content/roles/*.md` | Jobs on About |
 | `content/case-studies/*.md` | Work pages (`/work/[slug]`) |
-| `content/posts/*.md` | Writing (`/writing/[slug]`) — add a file with `title` in frontmatter |
+| `content/posts/*.md` | Case Studies (`/case-studies/[slug]`) — add a file with `title` in frontmatter |
 
 No `/api` and no `/v1` routes. This is a Site, not an API.
 
@@ -41,4 +41,4 @@ No `/api` and no `/v1` routes. This is a Site, not an API.
 - `/work` CaseStudy index
 - `/work/[slug]` one CaseStudy
 - `/about` Person, Roles, Toolbox
-- `/writing` Post list
+- `/case-studies` Case Studies list

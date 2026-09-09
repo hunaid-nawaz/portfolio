@@ -1,7 +1,8 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { THEME_COOKIE, type Theme } from "@/lib/theme";
+import { applyTheme } from "@/lib/theme-dom";
+import type { Theme } from "@/lib/theme";
 
 function currentTheme(): Theme {
   const root = document.documentElement;
@@ -28,13 +29,6 @@ function subscribeTheme(onChange: () => void) {
     observer.disconnect();
     media.removeEventListener("change", onChange);
   };
-}
-
-function applyTheme(theme: Theme) {
-  document.documentElement.classList.remove("light", "dark");
-  document.documentElement.classList.add(theme);
-  document.documentElement.style.colorScheme = theme;
-  document.cookie = `${THEME_COOKIE}=${theme};path=/;max-age=31536000;samesite=lax`;
 }
 
 export function ThemeToggle() {
